@@ -122,23 +122,24 @@ export const config = {
      */
     background: {
       type: "image" as MediaType,
-      src: "/media/hero/hero.svg",
-      poster: "/media/hero/hero.svg",
+      src: "/media/hero/hero.jpg",
+      poster: "/media/hero/hero.jpg",
     },
   },
 
   media: {
-    teacherPhoto: "/media/teacher/mestre-cobra.svg",
+    teacherPhoto: "/media/teacher/mestre-cobra.jpg",
+    /** The Capoeira Auê emblem, shown in the header. */
+    logo: "/media/logo.jpg",
   },
 
   /** Gallery media. Mix images and videos freely; drop files in /public/media. */
   gallery: [
-    { id: "g1", type: "image", src: "/media/gallery/gallery-1.svg", alt: "Capoeiristas in a roda" },
-    { id: "g2", type: "image", src: "/media/gallery/gallery-2.svg", alt: "A high capoeira kick" },
-    { id: "g3", type: "image", src: "/media/gallery/gallery-3.svg", alt: "Playing the berimbau" },
-    { id: "g4", type: "image", src: "/media/gallery/gallery-4.svg", alt: "Kids learning capoeira" },
-    { id: "g5", type: "image", src: "/media/gallery/gallery-5.svg", alt: "Outdoor class at the park" },
-    { id: "g6", type: "image", src: "/media/gallery/gallery-6.svg", alt: "Capoeira handstand and flow" },
+    { id: "g1", type: "image", src: "/media/gallery/roda-sunset.jpg", alt: "Capoeira Auê roda by the water at sunset" },
+    { id: "g2", type: "image", src: "/media/hero/hero.jpg", alt: "Capoeirista landing a flying kick during a roda" },
+    { id: "g3", type: "image", src: "/media/gallery/au-handstand.jpg", alt: "Capoeirista holding a one-handed handstand (au)" },
+    { id: "g4", type: "image", src: "/media/gallery/holiday-park.jpg", alt: "Capoeira Auê playing berimbau at Holiday Park, Fort Lauderdale" },
+    { id: "g5", type: "image", src: "/media/teacher/mestre-cobra.jpg", alt: "Mestre Cobra playing the berimbau and singing" },
   ] as GalleryItem[],
 
   /** Icons (by key) for the "About Capoeira" feature tiles, in display order. */
