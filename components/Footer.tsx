@@ -2,6 +2,7 @@
 
 import { useSite } from "@/lib/i18n";
 import { whatsappHref, telLink } from "@/lib/content";
+import { InstagramIcon } from "./Icons";
 
 export default function Footer() {
   const { t, cfg } = useSite();
@@ -56,7 +57,7 @@ export default function Footer() {
             <div className="footer__social">
               {cfg.social.map((s) => (
                 <a key={s.href} href={s.href} target="_blank" rel="noopener noreferrer" aria-label={s.label}>
-                  {s.label.charAt(0)}
+                  {s.label === "Instagram" ? <InstagramIcon width={20} height={20} /> : s.label.charAt(0)}
                 </a>
               ))}
             </div>

@@ -70,6 +70,26 @@ export const ArrowRight = (props: IconProps) => (
   </svg>
 );
 
+export const InstagramIcon = (props: IconProps) => (
+  <svg {...base(props)}>
+    <rect x="3" y="3" width="18" height="18" rx="5" />
+    <circle cx="12" cy="12" r="4" />
+    <circle cx="17.2" cy="6.8" r="1" fill="currentColor" stroke="none" />
+  </svg>
+);
+
+export const StarIcon = (props: IconProps) => (
+  <svg {...base(props)} fill="currentColor" stroke="none">
+    <path d="m12 2.6 2.7 5.6 6.1.9-4.4 4.3 1 6.1L12 20.7 6.6 19.5l1-6.1L3.2 9.1l6.1-.9z" />
+  </svg>
+);
+
+export const CloseIcon = (props: IconProps) => (
+  <svg {...base(props)}>
+    <path d="M6 6l12 12M18 6 6 18" />
+  </svg>
+);
+
 /* ---- Feature / category icons (keyed by string in content config) ---- */
 
 const Movement = (props: IconProps) => (

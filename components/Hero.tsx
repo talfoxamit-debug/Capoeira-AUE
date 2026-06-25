@@ -3,7 +3,7 @@
 import Image from "next/image";
 import { useSite } from "@/lib/i18n";
 import { whatsappHref, telLink } from "@/lib/content";
-import { WhatsAppIcon, PhoneIcon, PinIcon, GlobeIcon, ClockIcon } from "./Icons";
+import { WhatsAppIcon, PhoneIcon, PinIcon, GlobeIcon, ClockIcon, StarIcon } from "./Icons";
 
 export default function Hero() {
   const { t, cfg } = useSite();
@@ -24,10 +24,20 @@ export default function Hero() {
       <div className="hero__scrim" aria-hidden="true" />
 
       <div className="container hero__content">
-        <span className="hero__eyebrow">
-          <span className="dot" />
-          {t.hero.eyebrow}
-        </span>
+        <div className="hero__top-row">
+          <span className="hero__eyebrow">
+            <span className="dot" />
+            {t.hero.eyebrow}
+          </span>
+          <span className="hero__rating" aria-label={t.reviews.badge}>
+            <span className="hero__rating-stars" aria-hidden="true">
+              {[0, 1, 2, 3, 4].map((i) => (
+                <StarIcon key={i} width={14} height={14} />
+              ))}
+            </span>
+            {cfg.reviews.rating.toFixed(1)} · Google
+          </span>
+        </div>
 
         <h1>
           {t.hero.headlinePre} <span className="accent">{t.hero.headlineAccent}</span>

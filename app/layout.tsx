@@ -3,6 +3,7 @@ import { Sora, Inter } from "next/font/google";
 import { config } from "@/lib/content";
 import { LanguageProvider } from "@/lib/i18n";
 import JsonLd from "@/components/JsonLd";
+import Analytics from "@/components/Analytics";
 import "./globals.css";
 
 const site = config.site;
@@ -58,7 +59,13 @@ export const metadata: Metadata = {
     images: [site.ogImage],
   },
   robots: { index: true, follow: true },
-  icons: { icon: [{ url: "/favicon.svg", type: "image/svg+xml" }] },
+  icons: {
+    icon: [
+      { url: "/favicon.svg", type: "image/svg+xml" },
+      { url: "/favicon-32.png", type: "image/png", sizes: "32x32" },
+    ],
+    apple: [{ url: "/apple-touch-icon.png", sizes: "180x180" }],
+  },
 };
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
@@ -74,6 +81,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
       <body>
         <LanguageProvider>{children}</LanguageProvider>
         <JsonLd />
+        <Analytics />
       </body>
     </html>
   );

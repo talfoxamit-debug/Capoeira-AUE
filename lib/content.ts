@@ -65,7 +65,7 @@ export const config = {
     /** Production URL — update when you deploy (canonical + OpenGraph). */
     url: "https://capoeiraaue-fortlauderdale.com",
     /** OpenGraph / social share image (1200×630). */
-    ogImage: "/media/og-image.svg",
+    ogImage: "/media/og-image.jpg",
     /** SEO title + description (English — the primary search target). */
     title: "Capoeira Classes Fort Lauderdale | Mestre Cobra & Capoeira Auê",
     description:
@@ -91,6 +91,10 @@ export const config = {
   brand: {
     teacher: "Mestre Cobra",
     group: "Capoeira Auê Fort Lauderdale",
+    /** Capoeira Auê was founded in Rio de Janeiro by Mestre Dentinho (late),
+     *  Mestre Cobra's father. His brother Mestre Alcino leads the group in Brazil. */
+    founder: "Mestre Dentinho",
+    groupLeader: "Mestre Alcino",
   },
 
   location: {
@@ -159,8 +163,25 @@ export const config = {
     { id: "private", icon: "private" },
   ],
 
-  /** Social links — add some to show the row in the footer; empty = hidden. */
-  social: [] as { label: string; href: string }[],
+  /** Social links — shown in the header, footer and Instagram section. */
+  social: [{ label: "Instagram", href: "https://www.instagram.com/capoeira_aue" }] as {
+    label: string;
+    href: string;
+  }[],
+  instagramHandle: "@capoeira_aue",
+
+  /** Google review score, shown as social proof. Update as reviews grow. */
+  reviews: {
+    rating: 5.0,
+    count: 1,
+    url: "https://www.google.com/maps/search/?api=1&query=Capoeira+Au%C3%AA+Fort+Lauderdale",
+  },
+
+  /** Words that scroll across the energetic marquee band (same in every language). */
+  marquee: ["Ginga", "Música", "Roda", "Axé", "Berimbau", "Movimento", "Comunidade", "Capoeira"],
+
+  /** Optional Google Analytics 4 — paste your "G-XXXXXXXX" id here to enable it. */
+  analytics: { gaId: "" },
 };
 
 /* ---- Link helpers ---- */
@@ -170,6 +191,10 @@ export const telLink = `tel:${config.contact.phoneE164}`;
 export const mapsHref = `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(
   config.location.mapsQuery,
 )}`;
+/** Embeddable Google Map (no API key required). */
+export const mapsEmbed = `https://maps.google.com/maps?q=${encodeURIComponent(
+  config.location.mapsQuery,
+)}&z=15&output=embed`;
 /** Build a wa.me link with a (localized) pre-filled message. */
 export const whatsappHref = (message: string) =>
   `https://wa.me/${phoneDigits}?text=${encodeURIComponent(message)}`;
@@ -228,7 +253,26 @@ export interface Dict {
     intro: string;
     groups: Record<string, { title: string; description: string }>;
   };
-  gallery: { eyebrow: string; heading: string; intro: string; playLabel: string };
+  stats: {
+    years: string;
+    yearsLabel: string;
+    rating: string;
+    ratingLabel: string;
+    languages: string;
+    languagesLabel: string;
+    origin: string;
+    originLabel: string;
+  };
+  heritage: {
+    eyebrow: string;
+    heading: string;
+    paragraphs: string[];
+    quote: string;
+    quoteAuthor: string;
+  };
+  reviews: { eyebrow: string; heading: string; intro: string; badge: string; cta: string };
+  instagram: { eyebrow: string; heading: string; intro: string; cta: string };
+  gallery: { eyebrow: string; heading: string; intro: string; playLabel: string; viewLabel: string; closeLabel: string };
   faq: { eyebrow: string; heading: string; items: { q: string; a: string }[] };
   contact: {
     eyebrow: string;
@@ -298,15 +342,15 @@ const en: Dict = {
     eyebrow: "Your Teacher",
     role: "Mestre · Capoeira Auê · Rio de Janeiro",
     bio: [
-      "Mestre Cobra is from Rio de Janeiro and brings over 20 years of capoeira experience to every class. He comes from a deep capoeira family lineage — his father, Mestre Danchino, was one of the great masters of the art.",
-      "Today, Mestre Cobra teaches in Fort Lauderdale through Capoeira Auê, sharing movement, music, discipline, culture, and community. His classes are warm and welcoming: beginners feel at home, and experienced capoeiristas are challenged to grow.",
+      "Mestre Cobra is from Rio de Janeiro and brings over 20 years of capoeira experience to every class. He is the son of Mestre Dentinho, the founder of Capoeira Auê — a deep family lineage at the very heart of the art.",
+      "Today, Mestre Cobra carries that tradition to Fort Lauderdale, sharing movement, music, discipline, culture, and community through Capoeira Auê. His classes are warm and welcoming: beginners feel at home, and experienced capoeiristas are pushed to grow.",
     ],
     badgeLabel: "Experience",
     badgeValue: "20+ years",
     highlights: [
       { label: "20+ years", detail: "of capoeira experience" },
       { label: "Rio de Janeiro", detail: "born & raised in the home of capoeira" },
-      { label: "Family lineage", detail: "son of Mestre Danchino" },
+      { label: "Family lineage", detail: "son of Mestre Dentinho, founder of Auê" },
       { label: "3 languages", detail: "English, Portuguese & Spanish" },
     ],
   },
@@ -350,11 +394,46 @@ const en: Dict = {
       },
     },
   },
+  stats: {
+    years: "20+",
+    yearsLabel: "Years of experience",
+    rating: "5.0",
+    ratingLabel: "Rating on Google",
+    languages: "3",
+    languagesLabel: "Languages spoken",
+    origin: "Rio",
+    originLabel: "Born in the home of capoeira",
+  },
+  heritage: {
+    eyebrow: "Our Roots",
+    heading: "The Capoeira Auê Tradition",
+    paragraphs: [
+      "Capoeira Auê is a traditional capoeira school founded in Rio de Janeiro by Mestre Dentinho. After his passing, his sons carry the work forward — Mestre Alcino leading the group in Brazil, and Mestre Cobra bringing Auê to Fort Lauderdale.",
+      "When you train with us, you join a real lineage that reaches back to the roots of capoeira in Rio — its music, its movement, and its community.",
+    ],
+    quote: "Capoeira Auê is a traditional capoeira school founded in Rio de Janeiro by Mestre Dentinho.",
+    quoteAuthor: "The Capoeira Auê story",
+  },
+  reviews: {
+    eyebrow: "Loved Locally",
+    heading: "Trusted by Our Community",
+    intro: "Capoeiristas and families in Fort Lauderdale rate Capoeira Auê 5.0 on Google.",
+    badge: "Rated 5.0 on Google",
+    cta: "Read our reviews",
+  },
+  instagram: {
+    eyebrow: "Follow Along",
+    heading: "See Us in Action",
+    intro: "Classes, rodas, music and community — follow the journey on Instagram.",
+    cta: "Follow on Instagram",
+  },
   gallery: {
     eyebrow: "The Roda",
     heading: "Moments from Capoeira Auê",
-    intro: "A glimpse of training, music, and play with Capoeira Auê. Real photos and video drop right in here.",
+    intro: "A glimpse of training, music, and play with Capoeira Auê. Tap any photo to view it larger.",
     playLabel: "Play video",
+    viewLabel: "View larger",
+    closeLabel: "Close",
   },
   faq: {
     eyebrow: "Good to Know",
@@ -441,15 +520,15 @@ const es: Dict = {
     eyebrow: "Tu Profesor",
     role: "Mestre · Capoeira Auê · Río de Janeiro",
     bio: [
-      "Mestre Cobra es de Río de Janeiro y aporta más de 20 años de experiencia en capoeira a cada clase. Proviene de un profundo linaje familiar de capoeira: su padre, Mestre Danchino, fue uno de los grandes maestros del arte.",
-      "Hoy, Mestre Cobra enseña en Fort Lauderdale a través de Capoeira Auê, compartiendo movimiento, música, disciplina, cultura y comunidad. Sus clases son cálidas y acogedoras: los principiantes se sienten como en casa y los capoeiristas con experiencia encuentran nuevos retos.",
+      "Mestre Cobra es de Río de Janeiro y aporta más de 20 años de experiencia en capoeira a cada clase. Es hijo de Mestre Dentinho, fundador de Capoeira Auê — un profundo linaje familiar en el corazón mismo del arte.",
+      "Hoy, Mestre Cobra lleva esa tradición a Fort Lauderdale, compartiendo movimiento, música, disciplina, cultura y comunidad a través de Capoeira Auê. Sus clases son cálidas y acogedoras: los principiantes se sienten como en casa y los capoeiristas con experiencia encuentran nuevos retos.",
     ],
     badgeLabel: "Experiencia",
     badgeValue: "+20 años",
     highlights: [
       { label: "+20 años", detail: "de experiencia en capoeira" },
       { label: "Río de Janeiro", detail: "nacido en la cuna de la capoeira" },
-      { label: "Linaje familiar", detail: "hijo de Mestre Danchino" },
+      { label: "Linaje familiar", detail: "hijo de Mestre Dentinho, fundador de Auê" },
       { label: "3 idiomas", detail: "inglés, portugués y español" },
     ],
   },
@@ -493,11 +572,46 @@ const es: Dict = {
       },
     },
   },
+  stats: {
+    years: "+20",
+    yearsLabel: "Años de experiencia",
+    rating: "5.0",
+    ratingLabel: "Calificación en Google",
+    languages: "3",
+    languagesLabel: "Idiomas hablados",
+    origin: "Río",
+    originLabel: "Nacido en la cuna de la capoeira",
+  },
+  heritage: {
+    eyebrow: "Nuestras Raíces",
+    heading: "La Tradición de Capoeira Auê",
+    paragraphs: [
+      "Capoeira Auê es una escuela tradicional de capoeira fundada en Río de Janeiro por Mestre Dentinho. Tras su fallecimiento, sus hijos continúan el trabajo: Mestre Alcino lidera el grupo en Brasil y Mestre Cobra trae Auê a Fort Lauderdale.",
+      "Al entrenar con nosotros, te unes a un linaje real que se remonta a las raíces de la capoeira en Río — su música, su movimiento y su comunidad.",
+    ],
+    quote: "Capoeira Auê es una escuela tradicional de capoeira fundada en Río de Janeiro por Mestre Dentinho.",
+    quoteAuthor: "La historia de Capoeira Auê",
+  },
+  reviews: {
+    eyebrow: "Querida Localmente",
+    heading: "La Comunidad Confía en Nosotros",
+    intro: "Capoeiristas y familias de Fort Lauderdale califican a Capoeira Auê con 5.0 en Google.",
+    badge: "5.0 en Google",
+    cta: "Leer reseñas",
+  },
+  instagram: {
+    eyebrow: "Síguenos",
+    heading: "Míranos en Acción",
+    intro: "Clases, rodas, música y comunidad — sigue el camino en Instagram.",
+    cta: "Seguir en Instagram",
+  },
   gallery: {
     eyebrow: "La Roda",
     heading: "Momentos de Capoeira Auê",
-    intro: "Un vistazo al entrenamiento, la música y el juego con Capoeira Auê. Aquí se pueden añadir fotos y videos reales.",
+    intro: "Un vistazo al entrenamiento, la música y el juego con Capoeira Auê. Toca cualquier foto para verla más grande.",
     playLabel: "Reproducir video",
+    viewLabel: "Ver más grande",
+    closeLabel: "Cerrar",
   },
   faq: {
     eyebrow: "Bueno Saber",
@@ -584,15 +698,15 @@ const pt: Dict = {
     eyebrow: "Seu Professor",
     role: "Mestre · Capoeira Auê · Rio de Janeiro",
     bio: [
-      "O Mestre Cobra é do Rio de Janeiro e traz mais de 20 anos de experiência em capoeira para cada aula. Vem de uma profunda linhagem familiar de capoeira — seu pai, Mestre Danchino, foi um dos grandes mestres da arte.",
-      "Hoje, o Mestre Cobra ensina em Fort Lauderdale através da Capoeira Auê, compartilhando movimento, música, disciplina, cultura e comunidade. Suas aulas são acolhedoras: iniciantes se sentem em casa e capoeiristas experientes são desafiados a evoluir.",
+      "O Mestre Cobra é do Rio de Janeiro e traz mais de 20 anos de experiência em capoeira para cada aula. É filho do Mestre Dentinho, fundador da Capoeira Auê — uma profunda linhagem familiar no coração da arte.",
+      "Hoje, o Mestre Cobra leva essa tradição a Fort Lauderdale, compartilhando movimento, música, disciplina, cultura e comunidade através da Capoeira Auê. Suas aulas são acolhedoras: iniciantes se sentem em casa e capoeiristas experientes são desafiados a evoluir.",
     ],
     badgeLabel: "Experiência",
     badgeValue: "+20 anos",
     highlights: [
       { label: "+20 anos", detail: "de experiência em capoeira" },
       { label: "Rio de Janeiro", detail: "nascido no berço da capoeira" },
-      { label: "Linhagem familiar", detail: "filho do Mestre Danchino" },
+      { label: "Linhagem familiar", detail: "filho do Mestre Dentinho, fundador da Auê" },
       { label: "3 idiomas", detail: "inglês, português e espanhol" },
     ],
   },
@@ -636,11 +750,46 @@ const pt: Dict = {
       },
     },
   },
+  stats: {
+    years: "+20",
+    yearsLabel: "Anos de experiência",
+    rating: "5.0",
+    ratingLabel: "Avaliação no Google",
+    languages: "3",
+    languagesLabel: "Idiomas falados",
+    origin: "Rio",
+    originLabel: "Nascido no berço da capoeira",
+  },
+  heritage: {
+    eyebrow: "Nossas Raízes",
+    heading: "A Tradição da Capoeira Auê",
+    paragraphs: [
+      "A Capoeira Auê é uma tradicional escola de capoeira fundada no Rio de Janeiro pelo Mestre Dentinho. Após seu falecimento, seus filhos seguem com o trabalho — Mestre Alcino à frente do grupo no Brasil e Mestre Cobra trazendo a Auê para Fort Lauderdale.",
+      "Ao treinar conosco, você entra para uma linhagem real que remonta às raízes da capoeira no Rio — sua música, seu movimento e sua comunidade.",
+    ],
+    quote: "A Capoeira Auê é uma tradicional escola de capoeira fundada no Rio de Janeiro pelo Mestre Dentinho.",
+    quoteAuthor: "A história da Capoeira Auê",
+  },
+  reviews: {
+    eyebrow: "Querida na Região",
+    heading: "A Comunidade Confia na Gente",
+    intro: "Capoeiristas e famílias de Fort Lauderdale avaliam a Capoeira Auê com 5.0 no Google.",
+    badge: "5.0 no Google",
+    cta: "Ver avaliações",
+  },
+  instagram: {
+    eyebrow: "Acompanhe",
+    heading: "Veja a Gente em Ação",
+    intro: "Aulas, rodas, música e comunidade — acompanhe tudo no Instagram.",
+    cta: "Seguir no Instagram",
+  },
   gallery: {
     eyebrow: "A Roda",
     heading: "Momentos da Capoeira Auê",
-    intro: "Um pouco do treino, da música e do jogo com a Capoeira Auê. Fotos e vídeos reais entram aqui facilmente.",
+    intro: "Um pouco do treino, da música e do jogo com a Capoeira Auê. Toque em qualquer foto para ampliar.",
     playLabel: "Reproduzir vídeo",
+    viewLabel: "Ver maior",
+    closeLabel: "Fechar",
   },
   faq: {
     eyebrow: "Bom Saber",

@@ -452,6 +452,14 @@ ul {
   animation: rise 0.8s cubic-bezier(0.2, 0.7, 0.2, 1) both;
 }
 
+.hero__top-row {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 0.7rem 0.9rem;
+  margin-bottom: 1.4rem;
+}
+
 .hero__eyebrow {
   display: inline-flex;
   align-items: center;
@@ -466,7 +474,26 @@ ul {
   font-size: 0.78rem;
   letter-spacing: 0.1em;
   text-transform: uppercase;
-  margin-bottom: 1.4rem;
+}
+
+.hero__rating {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.45rem;
+  background: rgba(255, 255, 255, 0.12);
+  border: 1px solid rgba(255, 255, 255, 0.25);
+  backdrop-filter: blur(6px);
+  padding: 0.45rem 0.85rem;
+  border-radius: 999px;
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 0.8rem;
+  color: #fff;
+}
+
+.hero__rating-stars {
+  display: inline-flex;
+  color: var(--gold-400);
 }
 
 .hero__eyebrow .dot {
@@ -885,6 +912,14 @@ ul {
   background: var(--cream-2);
   aspect-ratio: 1 / 1;
   box-shadow: var(--shadow-sm);
+  /* button reset (tiles are clickable to open the lightbox) */
+  border: none;
+  padding: 0;
+  margin: 0;
+  width: 100%;
+  font: inherit;
+  cursor: pointer;
+  display: block;
 }
 
 .gallery-item img,
@@ -1253,6 +1288,412 @@ ul {
   .reveal {
     opacity: 1;
     transform: none;
+  }
+}
+
+/* ==========================================================================
+   HERO KEN BURNS (slow cinematic zoom on the background photo)
+   ========================================================================== */
+.hero__media img,
+.hero__media video {
+  animation: kenburns 22s ease-in-out infinite alternate;
+}
+
+@keyframes kenburns {
+  from {
+    transform: scale(1.03);
+  }
+  to {
+    transform: scale(1.13);
+  }
+}
+
+/* ==========================================================================
+   MARQUEE
+   ========================================================================== */
+.marquee {
+  background: linear-gradient(90deg, var(--green-800), var(--green-600));
+  color: #fff;
+  overflow: hidden;
+  padding: 0.85rem 0;
+}
+
+.marquee__track {
+  display: inline-flex;
+  align-items: center;
+  white-space: nowrap;
+  animation: marquee 28s linear infinite;
+  will-change: transform;
+}
+
+.marquee:hover .marquee__track {
+  animation-play-state: paused;
+}
+
+.marquee__item {
+  display: inline-flex;
+  align-items: center;
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: clamp(1.05rem, 2.4vw, 1.55rem);
+  text-transform: uppercase;
+  letter-spacing: 0.02em;
+}
+
+.marquee__sep {
+  color: var(--gold-400);
+  margin: 0 1.4rem;
+  font-size: 0.85em;
+}
+
+@keyframes marquee {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(-50%);
+  }
+}
+
+/* ==========================================================================
+   STATS BAND
+   ========================================================================== */
+.stats-section {
+  background: var(--cream);
+  padding-block: clamp(2.2rem, 5vw, 3.4rem);
+  border-bottom: 1px solid rgba(13, 79, 54, 0.07);
+}
+
+.stats-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 1.6rem 1rem;
+  text-align: center;
+}
+
+.stat__value {
+  font-family: var(--font-display);
+  font-weight: 800;
+  font-size: clamp(2.1rem, 6vw, 3rem);
+  line-height: 1;
+  color: var(--green-700);
+  letter-spacing: -0.03em;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.25rem;
+}
+
+.stat__star {
+  color: var(--gold-500);
+}
+
+.stat__label {
+  margin-top: 0.45rem;
+  font-size: 0.9rem;
+  color: var(--text-soft);
+}
+
+@media (min-width: 760px) {
+  .stats-grid {
+    grid-template-columns: repeat(4, 1fr);
+  }
+  .stat + .stat {
+    border-left: 1px solid rgba(13, 79, 54, 0.12);
+  }
+}
+
+/* ==========================================================================
+   HERITAGE
+   ========================================================================== */
+.heritage__grid {
+  display: grid;
+  gap: clamp(2rem, 5vw, 3.5rem);
+  align-items: center;
+}
+
+.heritage__quote {
+  position: relative;
+  background: rgba(255, 255, 255, 0.06);
+  border: 1px solid rgba(255, 255, 255, 0.14);
+  border-radius: var(--radius-lg);
+  padding: 2.4rem 1.8rem 1.8rem;
+}
+
+.heritage__mark {
+  position: absolute;
+  top: 0.4rem;
+  left: 1.3rem;
+  font-family: var(--font-display);
+  font-size: 4.5rem;
+  line-height: 1;
+  color: var(--gold-400);
+  opacity: 0.85;
+}
+
+.heritage__quote blockquote {
+  margin: 0;
+  font-family: var(--font-display);
+  font-weight: 600;
+  font-size: clamp(1.15rem, 2.4vw, 1.5rem);
+  line-height: 1.35;
+  color: #fff;
+}
+
+.heritage__quote figcaption {
+  margin-top: 1rem;
+  color: var(--gold-400);
+  font-size: 0.88rem;
+  font-weight: 600;
+  letter-spacing: 0.03em;
+}
+
+@media (min-width: 860px) {
+  .heritage__grid {
+    grid-template-columns: 1.1fr 0.9fr;
+  }
+}
+
+/* ==========================================================================
+   REVIEWS / SOCIAL PROOF
+   ========================================================================== */
+.eyebrow--center {
+  justify-content: center;
+}
+
+.section-head--center {
+  max-width: 680px;
+  margin-inline: auto;
+  text-align: center;
+}
+
+.section-head--center .section-intro {
+  margin-inline: auto;
+}
+
+.reviews__card {
+  max-width: 680px;
+  margin-inline: auto;
+  text-align: center;
+  background: var(--surface);
+  border: 1px solid rgba(13, 79, 54, 0.08);
+  border-radius: var(--radius-xl);
+  box-shadow: var(--shadow-lg);
+  padding: clamp(2rem, 5vw, 3rem);
+}
+
+.reviews__stars {
+  display: inline-flex;
+  gap: 0.25rem;
+  color: var(--gold-500);
+  margin-bottom: 1rem;
+}
+
+.reviews__card .section-intro {
+  max-width: 520px;
+  margin-inline: auto;
+}
+
+.reviews__card .btn {
+  margin-top: 1.4rem;
+}
+
+/* ==========================================================================
+   INSTAGRAM
+   ========================================================================== */
+.instagram__cta {
+  margin-top: 1.3rem;
+}
+
+.instagram__grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 0.6rem;
+  margin-top: 2.4rem;
+}
+
+.instagram__tile {
+  position: relative;
+  aspect-ratio: 1 / 1;
+  border-radius: var(--radius-sm);
+  overflow: hidden;
+  display: block;
+}
+
+.instagram__tile img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.45s ease;
+}
+
+.instagram__tile:hover img {
+  transform: scale(1.08);
+}
+
+.instagram__overlay {
+  position: absolute;
+  inset: 0;
+  display: grid;
+  place-items: center;
+  background: rgba(6, 38, 25, 0.4);
+  color: #fff;
+  opacity: 0;
+  transition: opacity 0.25s ease;
+}
+
+.instagram__tile:hover .instagram__overlay {
+  opacity: 1;
+}
+
+@media (min-width: 700px) {
+  .instagram__grid {
+    grid-template-columns: repeat(6, 1fr);
+  }
+}
+
+/* ==========================================================================
+   MAP EMBED
+   ========================================================================== */
+.map-embed {
+  margin-top: 1.1rem;
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  box-shadow: var(--shadow);
+  border: 1px solid rgba(13, 79, 54, 0.08);
+}
+
+.map-embed iframe {
+  display: block;
+  width: 100%;
+  height: clamp(260px, 40vw, 380px);
+  border: 0;
+}
+
+/* ==========================================================================
+   STICKY MOBILE CONTACT BAR
+   ========================================================================== */
+.sticky-bar {
+  position: fixed;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 60;
+  display: none;
+  gap: 0.6rem;
+  padding: 0.6rem 0.8rem calc(0.6rem + env(safe-area-inset-bottom));
+  background: rgba(255, 255, 255, 0.92);
+  backdrop-filter: saturate(160%) blur(12px);
+  border-top: 1px solid rgba(13, 79, 54, 0.12);
+}
+
+.sticky-bar__btn {
+  flex: 1;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 0.98rem;
+  padding: 0.85rem;
+  border-radius: 999px;
+  box-shadow: var(--shadow-sm);
+}
+
+.sticky-bar__btn--wa {
+  background: #25d366;
+  color: #053a1c;
+}
+
+.sticky-bar__btn--call {
+  background: var(--gold-500);
+  color: #3a2b00;
+}
+
+@media (max-width: 759px) {
+  .sticky-bar {
+    display: flex;
+  }
+  body {
+    padding-bottom: 76px;
+  }
+}
+
+/* ==========================================================================
+   LIGHTBOX
+   ========================================================================== */
+.lightbox {
+  position: fixed;
+  inset: 0;
+  z-index: 100;
+  background: rgba(4, 18, 12, 0.93);
+  display: grid;
+  grid-template-columns: auto 1fr auto;
+  align-items: center;
+  gap: 0.5rem;
+  padding: clamp(1rem, 4vw, 2.5rem);
+  animation: fadein 0.2s ease;
+}
+
+@keyframes fadein {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+.lightbox__figure {
+  margin: 0;
+  justify-self: center;
+  text-align: center;
+}
+
+.lightbox__figure img {
+  width: auto;
+  height: auto;
+  max-width: 100%;
+  max-height: 80vh;
+  border-radius: var(--radius);
+  box-shadow: var(--shadow-lg);
+}
+
+.lightbox__figure figcaption {
+  color: #cfe0d6;
+  margin-top: 0.8rem;
+  font-size: 0.9rem;
+}
+
+.lightbox__close {
+  position: absolute;
+  top: 1rem;
+  right: 1rem;
+}
+
+.lightbox__close,
+.lightbox__nav {
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  border: none;
+  background: rgba(255, 255, 255, 0.14);
+  color: #fff;
+  display: grid;
+  place-items: center;
+  cursor: pointer;
+  transition: background 0.15s ease;
+}
+
+.lightbox__close:hover,
+.lightbox__nav:hover {
+  background: rgba(255, 255, 255, 0.3);
+}
+
+@media (max-width: 560px) {
+  .lightbox__nav {
+    width: 42px;
+    height: 42px;
   }
 }
 

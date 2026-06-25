@@ -1,7 +1,7 @@
 "use client";
 
 import { useSite } from "@/lib/i18n";
-import { mapsHref } from "@/lib/content";
+import { mapsHref, mapsEmbed } from "@/lib/content";
 import { PinIcon, ArrowRight } from "./Icons";
 import Reveal from "./Reveal";
 
@@ -63,6 +63,18 @@ export default function SchedulePricing() {
               {t.schedule.openInMaps}
               <ArrowRight width={18} height={18} />
             </a>
+          </div>
+        </Reveal>
+
+        <Reveal>
+          <div className="map-embed">
+            <iframe
+              src={mapsEmbed}
+              title={`${cfg.location.name} — ${cfg.location.city}`}
+              loading="lazy"
+              allowFullScreen
+              referrerPolicy="no-referrer-when-downgrade"
+            />
           </div>
         </Reveal>
       </div>

@@ -16,7 +16,7 @@ You do **not** need to touch any component code.
 | `hero/`           | Big background photo/video        | 1600×900+ (landscape)   |
 | `teacher/`        | Photo of Mestre Cobra             | 4:5 portrait, ~800×1000 |
 | `gallery/`        | Gallery grid photos & videos      | square ~1000×1000       |
-| `og-image.svg`    | Social-share preview image        | exactly 1200×630        |
+| `og-image.jpg`    | Social-share preview image        | exactly 1200×630        |
 
 All media paths live under `config` in `lib/content.ts`.
 

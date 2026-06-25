@@ -46,6 +46,9 @@ Common edits:
 | Prices                      | `config.pricing` + the words in `dictionary`|
 | Any text / FAQ              | `dictionary` (`en`, `es`, `pt`)             |
 | Photos & videos             | `config.hero`, `config.media`, `config.gallery` |
+| Instagram / social          | `config.social`, `config.instagramHandle`   |
+| Google review score         | `config.reviews`                             |
+| Google Analytics (optional) | `config.analytics.gaId` (paste `G-XXXXXXXX`) |
 
 ## 🖼 Replacing photos & videos
 
@@ -62,10 +65,11 @@ app/
   globals.css       # design system (palette in :root)
   robots.ts         # /robots.txt
   sitemap.ts        # /sitemap.xml
-components/          # Hero, AboutCapoeira, AboutTeacher, SchedulePricing,
-                    # WhoCanJoin, Gallery, FAQ, Contact, Footer, Header,
-                    # LanguageSwitcher, ...
-  JsonLd.tsx        # LocalBusiness / SportsActivityLocation + FAQ structured data
+components/          # Header, Hero, Marquee, Stats, AboutCapoeira, AboutTeacher,
+                    # Heritage, SchedulePricing (+map), WhoCanJoin, Gallery (+lightbox),
+                    # Reviews, InstagramSection, FAQ, Contact, Footer,
+                    # StickyContactBar, LanguageSwitcher, Analytics, ...
+  JsonLd.tsx        # SportsActivityLocation + FAQ + aggregateRating structured data
 lib/content.ts      # ← all editable content (config + en/es/pt dictionary)
 lib/i18n.tsx        # language provider + useSite() hook (EN/ES/PT switching)
 public/media/       # images & videos (with a README on replacing them)

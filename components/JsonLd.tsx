@@ -52,11 +52,19 @@ export default function JsonLd() {
       addressCountry: "US",
     },
     areaServed: { "@type": "City", name: "Fort Lauderdale" },
+    sameAs: config.social.map((s) => s.href),
+    aggregateRating: {
+      "@type": "AggregateRating",
+      ratingValue: config.reviews.rating.toFixed(1),
+      reviewCount: String(config.reviews.count),
+      bestRating: "5",
+    },
     founder: {
       "@type": "Person",
       name: brand.teacher,
       jobTitle: "Capoeira Mestre",
-      description: "Capoeira master from Rio de Janeiro with over 20 years of experience, son of Mestre Danchino.",
+      description:
+        "Capoeira master from Rio de Janeiro with over 20 years of experience, son of Mestre Dentinho (founder of Capoeira Auê).",
     },
     openingHoursSpecification: schedule.classes.map((c) => ({
       "@type": "OpeningHoursSpecification",
