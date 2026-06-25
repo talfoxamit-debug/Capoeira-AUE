@@ -1504,6 +1504,10 @@ ul {
   margin-top: 1.3rem;
 }
 
+.instagram__feed {
+  margin-top: 2.4rem;
+}
+
 .instagram__grid {
   display: grid;
   grid-template-columns: repeat(3, 1fr);

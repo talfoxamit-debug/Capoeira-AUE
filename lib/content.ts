@@ -92,9 +92,9 @@ export const config = {
     teacher: "Mestre Cobra",
     group: "Capoeira Auê Fort Lauderdale",
     /** Capoeira Auê was founded in Rio de Janeiro by Mestre Dentinho (late),
-     *  Mestre Cobra's father. His brother Mestre Alcino leads the group in Brazil. */
+     *  Mestre Cobra's father. Mestre Cobra brought the group from Rio to
+     *  Fort Lauderdale, where he leads it today. */
     founder: "Mestre Dentinho",
-    groupLeader: "Mestre Alcino",
   },
 
   location: {
@@ -169,6 +169,16 @@ export const config = {
     href: string;
   }[],
   instagramHandle: "@capoeira_aue",
+  /**
+   * LIVE Instagram feed (optional, ~2-minute setup).
+   * Instagram only allows a live feed if the account owner connects it, so:
+   *   1. Go to https://behold.so and sign up (free).
+   *   2. Connect the @capoeira_aue Instagram account and create a feed.
+   *   3. Copy the Feed ID and paste it below.
+   * When set, the Instagram section shows live posts automatically.
+   * When empty, it shows the curated photo grid instead.
+   */
+  instagramFeedId: "",
 
   /** Google review score, shown as social proof. Update as reviews grow. */
   reviews: {
@@ -408,7 +418,7 @@ const en: Dict = {
     eyebrow: "Our Roots",
     heading: "The Capoeira Auê Tradition",
     paragraphs: [
-      "Capoeira Auê is a traditional capoeira school founded in Rio de Janeiro by Mestre Dentinho. After his passing, his sons carry the work forward — Mestre Alcino leading the group in Brazil, and Mestre Cobra bringing Auê to Fort Lauderdale.",
+      "Capoeira Auê is a traditional capoeira school founded in Rio de Janeiro by Mestre Dentinho. Today his son, Mestre Cobra, carries the tradition forward — bringing Capoeira Auê all the way from Rio de Janeiro to Fort Lauderdale, where he leads the group.",
       "When you train with us, you join a real lineage that reaches back to the roots of capoeira in Rio — its music, its movement, and its community.",
     ],
     quote: "Capoeira Auê is a traditional capoeira school founded in Rio de Janeiro by Mestre Dentinho.",
@@ -586,7 +596,7 @@ const es: Dict = {
     eyebrow: "Nuestras Raíces",
     heading: "La Tradición de Capoeira Auê",
     paragraphs: [
-      "Capoeira Auê es una escuela tradicional de capoeira fundada en Río de Janeiro por Mestre Dentinho. Tras su fallecimiento, sus hijos continúan el trabajo: Mestre Alcino lidera el grupo en Brasil y Mestre Cobra trae Auê a Fort Lauderdale.",
+      "Capoeira Auê es una escuela tradicional de capoeira fundada en Río de Janeiro por Mestre Dentinho. Hoy su hijo, Mestre Cobra, continúa la tradición — trayendo Capoeira Auê desde Río de Janeiro hasta Fort Lauderdale, donde lidera el grupo.",
       "Al entrenar con nosotros, te unes a un linaje real que se remonta a las raíces de la capoeira en Río — su música, su movimiento y su comunidad.",
     ],
     quote: "Capoeira Auê es una escuela tradicional de capoeira fundada en Río de Janeiro por Mestre Dentinho.",
@@ -764,7 +774,7 @@ const pt: Dict = {
     eyebrow: "Nossas Raízes",
     heading: "A Tradição da Capoeira Auê",
     paragraphs: [
-      "A Capoeira Auê é uma tradicional escola de capoeira fundada no Rio de Janeiro pelo Mestre Dentinho. Após seu falecimento, seus filhos seguem com o trabalho — Mestre Alcino à frente do grupo no Brasil e Mestre Cobra trazendo a Auê para Fort Lauderdale.",
+      "A Capoeira Auê é uma tradicional escola de capoeira fundada no Rio de Janeiro pelo Mestre Dentinho. Hoje seu filho, o Mestre Cobra, dá continuidade à tradição — trazendo a Capoeira Auê do Rio de Janeiro até Fort Lauderdale, onde lidera o grupo.",
       "Ao treinar conosco, você entra para uma linhagem real que remonta às raízes da capoeira no Rio — sua música, seu movimento e sua comunidade.",
     ],
     quote: "A Capoeira Auê é uma tradicional escola de capoeira fundada no Rio de Janeiro pelo Mestre Dentinho.",

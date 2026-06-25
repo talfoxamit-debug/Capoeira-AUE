@@ -1,13 +1,19 @@
 "use client";
 
 import Image from "next/image";
+import Script from "next/script";
+import { createElement } from "react";
 import { useSite } from "@/lib/i18n";
 import { InstagramIcon } from "./Icons";
 import Reveal from "./Reveal";
 
+/** Behold widget loader (https://behold.so). Update if Behold changes its URL. */
+const BEHOLD_WIDGET_SRC = "https://w.behold.so/widget.js";
+
 export default function InstagramSection() {
   const { t, cfg } = useSite();
   const ig = cfg.social.find((s) => s.label === "Instagram")?.href ?? "#";
+  const feedId = cfg.instagramFeedId;
   const tiles = cfg.gallery.slice(0, 6);
 
   return (
@@ -23,23 +29,32 @@ export default function InstagramSection() {
           </a>
         </Reveal>
 
-        <Reveal className="instagram__grid">
-          {tiles.map((item) => (
-            <a
-              key={item.id}
-              className="instagram__tile"
-              href={ig}
-              target="_blank"
-              rel="noopener noreferrer"
-              aria-label={t.instagram.cta}
-            >
-              <Image src={item.src} alt={item.alt} width={420} height={420} sizes="(min-width: 700px) 16vw, 33vw" />
-              <span className="instagram__overlay" aria-hidden="true">
-                <InstagramIcon width={26} height={26} />
-              </span>
-            </a>
-          ))}
-        </Reveal>
+        {feedId ? (
+          // Live feed: renders real posts once a Behold feed ID is set in config.
+          <Reveal className="instagram__feed">
+            <Script src={BEHOLD_WIDGET_SRC} type="module" strategy="afterInteractive" />
+            {createElement("behold-widget", { "feed-id": feedId })}
+          </Reveal>
+        ) : (
+          // Fallback: curated photo grid linking to the profile.
+          <Reveal className="instagram__grid">
+            {tiles.map((item) => (
+              <a
+                key={item.id}
+                className="instagram__tile"
+                href={ig}
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label={t.instagram.cta}
+              >
+                <Image src={item.src} alt={item.alt} width={420} height={420} sizes="(min-width: 700px) 16vw, 33vw" />
+                <span className="instagram__overlay" aria-hidden="true">
+                  <InstagramIcon width={26} height={26} />
+                </span>
+              </a>
+            ))}
+          </Reveal>
+        )}
       </div>
     </section>
   );

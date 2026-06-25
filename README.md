@@ -50,6 +50,20 @@ Common edits:
 | Google review score         | `config.reviews`                             |
 | Google Analytics (optional) | `config.analytics.gaId` (paste `G-XXXXXXXX`) |
 
+## 📸 Live Instagram feed (optional, ~2 minutes)
+
+The Instagram section shows a curated photo grid by default. To make it show
+**live posts** from [@capoeira_aue](https://www.instagram.com/capoeira_aue):
+
+1. Sign up free at **[behold.so](https://behold.so)**.
+2. Connect the `@capoeira_aue` Instagram account and create a feed.
+3. Copy the **Feed ID** and paste it into `config.instagramFeedId` in
+   `lib/content.ts`.
+
+That's it — the section switches to the live feed automatically. (Instagram
+requires the account owner to authorize any live feed, which is why this one
+step can't be pre-filled.)
+
 ## 🖼 Replacing photos & videos
 
 See **`public/media/README.md`** — drop your file into `public/media/...` and
