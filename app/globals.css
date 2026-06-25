@@ -362,13 +362,23 @@ ul {
   }
 }
 
-/* Hide button text labels on small screens (icon-only buttons in the header). */
-@media (max-width: 560px) {
+/* Icon-only header buttons until there's room for text labels. */
+@media (max-width: 760px) {
   .header__actions .btn__label {
     display: none;
   }
   .header__actions .btn--sm {
     padding: 0.62rem 0.72rem;
+  }
+}
+
+/* On small phones, show just the logo — the hero states the full name. */
+@media (max-width: 560px) {
+  .brand-mark__text {
+    display: none;
+  }
+  .header__inner {
+    gap: 0.6rem;
   }
 }
 
