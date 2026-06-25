@@ -1,20 +1,16 @@
-import {
-  site,
-  brand,
-  location,
-  schedule,
-  faq,
-  contact,
-  pricing,
-} from "@/lib/content";
+import { config, dictionary } from "@/lib/content";
 
 /**
  * Structured data for Google + AI assistants:
  *  - SportsActivityLocation (a LocalBusiness subtype) describing the school
  *  - FAQPage built from the FAQ content
- * Rendered as a single JSON-LD script in <head>/<body>.
+ * Rendered in English (the primary search language) regardless of the
+ * visitor's selected on-page language.
  */
 export default function JsonLd() {
+  const { site, brand, location, schedule, contact } = config;
+  const en = dictionary.en;
+
   const dayMap: Record<string, string> = {
     Sunday: "https://schema.org/Sunday",
     Monday: "https://schema.org/Monday",
@@ -26,7 +22,6 @@ export default function JsonLd() {
   };
 
   const to24h = (time: string) => {
-    // "8:00 AM" -> "08:00", "6:30 AM" -> "06:30"
     const match = time.match(/(\d+):(\d+)\s*(AM|PM)/i);
     if (!match) return "00:00";
     let h = parseInt(match[1], 10);
@@ -47,29 +42,25 @@ export default function JsonLd() {
     telephone: contact.phoneE164,
     image: `${site.url}${site.ogImage}`,
     sport: "Capoeira",
-    knowsLanguage: brand.languages,
+    knowsLanguage: ["English", "Portuguese", "Spanish"],
     priceRange: "$",
     address: {
       "@type": "PostalAddress",
-      streetAddress: `${location.name} (${location.detail})`,
+      streetAddress: `${location.name} (${en.schedule.locationDetail})`,
       addressLocality: "Fort Lauderdale",
       addressRegion: "FL",
       addressCountry: "US",
     },
-    areaServed: {
-      "@type": "City",
-      name: "Fort Lauderdale",
-    },
+    areaServed: { "@type": "City", name: "Fort Lauderdale" },
     founder: {
       "@type": "Person",
       name: brand.teacher,
       jobTitle: "Capoeira Mestre",
-      description:
-        "Capoeira master from Rio de Janeiro with over 20 years of experience, son of Mestre Danchino.",
+      description: "Capoeira master from Rio de Janeiro with over 20 years of experience, son of Mestre Danchino.",
     },
     openingHoursSpecification: schedule.classes.map((c) => ({
       "@type": "OpeningHoursSpecification",
-      dayOfWeek: dayMap[c.day],
+      dayOfWeek: dayMap[c.schemaDay],
       opens: to24h(c.time),
     })),
     makesOffer: [
@@ -78,14 +69,14 @@ export default function JsonLd() {
         name: "First capoeira class",
         price: "0",
         priceCurrency: "USD",
-        description: pricing.firstClass.note,
+        description: en.pricing.firstNote,
       },
       {
         "@type": "Offer",
         name: "Drop-in capoeira class",
         price: "20",
         priceCurrency: "USD",
-        description: pricing.perClass.note,
+        description: en.pricing.perNote,
       },
     ],
   };
@@ -93,26 +84,17 @@ export default function JsonLd() {
   const faqSchema = {
     "@context": "https://schema.org",
     "@type": "FAQPage",
-    mainEntity: faq.items.map((item) => ({
+    mainEntity: en.faq.items.map((item) => ({
       "@type": "Question",
-      name: item.question,
-      acceptedAnswer: {
-        "@type": "Answer",
-        text: item.answer,
-      },
+      name: item.q,
+      acceptedAnswer: { "@type": "Answer", text: item.a },
     })),
   };
 
   return (
     <>
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(businessSchema) }}
-      />
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }}
-      />
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(businessSchema) }} />
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }} />
     </>
   );
 }

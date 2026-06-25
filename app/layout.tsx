@@ -1,8 +1,11 @@
 import type { Metadata, Viewport } from "next";
 import { Sora, Inter } from "next/font/google";
-import { site } from "@/lib/content";
+import { config } from "@/lib/content";
+import { LanguageProvider } from "@/lib/i18n";
 import JsonLd from "@/components/JsonLd";
 import "./globals.css";
+
+const site = config.site;
 
 const display = Sora({
   subsets: ["latin"],
@@ -28,14 +31,13 @@ export const metadata: Metadata = {
   title: site.title,
   description: site.description,
   keywords: site.keywords,
-  alternates: {
-    canonical: "/",
-  },
+  alternates: { canonical: "/" },
   applicationName: site.name,
   authors: [{ name: "Mestre Cobra" }],
   openGraph: {
     type: "website",
-    locale: site.locale,
+    locale: "en_US",
+    alternateLocale: ["es_ES", "pt_BR"],
     url: site.url,
     siteName: site.name,
     title: site.title,
@@ -55,15 +57,8 @@ export const metadata: Metadata = {
     description: site.description,
     images: [site.ogImage],
   },
-  robots: {
-    index: true,
-    follow: true,
-  },
-  icons: {
-    icon: [
-      { url: "/favicon.svg", type: "image/svg+xml" },
-    ],
-  },
+  robots: { index: true, follow: true },
+  icons: { icon: [{ url: "/favicon.svg", type: "image/svg+xml" }] },
 };
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
@@ -77,7 +72,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         </noscript>
       </head>
       <body>
-        {children}
+        <LanguageProvider>{children}</LanguageProvider>
         <JsonLd />
       </body>
     </html>

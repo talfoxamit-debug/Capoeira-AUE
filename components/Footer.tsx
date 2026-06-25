@@ -1,49 +1,48 @@
-import {
-  brand,
-  footer,
-  location,
-  schedule,
-  contact,
-  whatsappLink,
-  telLink,
-} from "@/lib/content";
+"use client";
+
+import { useSite } from "@/lib/i18n";
+import { whatsappHref, telLink } from "@/lib/content";
 
 export default function Footer() {
-  const year = 2026; // update yearly, or wire to a server timestamp if preferred
+  const { t, cfg } = useSite();
+  const year = 2026; // update yearly
+  const wa = whatsappHref(t.contact.whatsappMessage);
 
   return (
     <footer className="footer">
       <div className="container">
         <div className="footer__top">
           <div className="footer__brand">
-            <strong>{brand.group}</strong>
-            <p>{footer.tagline}</p>
+            <strong>{cfg.brand.group}</strong>
+            <p>{t.footer.tagline}</p>
           </div>
 
           <div className="footer__cols">
             <div>
-              <h4>Train</h4>
+              <h4>{t.footer.trainHeading}</h4>
               <ul>
-                {schedule.classes.map((c) => (
-                  <li key={c.day}>
-                    {c.day} — {c.time}
+                {cfg.schedule.classes.map((c) => (
+                  <li key={c.id}>
+                    {t.schedule.days[c.id]} — {c.time}
                   </li>
                 ))}
-                <li>{location.full}</li>
+                <li>{t.contact.locationFull}</li>
               </ul>
             </div>
             <div>
-              <h4>Connect</h4>
+              <h4>{t.footer.connectHeading}</h4>
               <ul>
                 <li>
-                  <a href={whatsappLink} target="_blank" rel="noopener noreferrer">
+                  <a href={wa} target="_blank" rel="noopener noreferrer">
                     WhatsApp
                   </a>
                 </li>
                 <li>
-                  <a href={telLink}>{contact.phoneDisplay}</a>
+                  <a href={telLink}>{cfg.contact.phoneDisplay}</a>
                 </li>
-                <li>Languages: {brand.languages.join(", ")}</li>
+                <li>
+                  {t.footer.languagesLabel}: {t.languagesLine}
+                </li>
               </ul>
             </div>
           </div>
@@ -51,11 +50,11 @@ export default function Footer() {
 
         <div className="footer__bottom">
           <span>
-            © {year} {brand.group}. Taught by {brand.teacher}.
+            © {year} {cfg.brand.group}. {t.footer.rights}
           </span>
-          {footer.social.length > 0 && (
+          {cfg.social.length > 0 && (
             <div className="footer__social">
-              {footer.social.map((s) => (
+              {cfg.social.map((s) => (
                 <a key={s.href} href={s.href} target="_blank" rel="noopener noreferrer" aria-label={s.label}>
                   {s.label.charAt(0)}
                 </a>

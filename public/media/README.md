@@ -18,15 +18,18 @@ You do **not** need to touch any component code.
 | `gallery/`        | Gallery grid photos & videos      | square ~1000×1000       |
 | `og-image.svg`    | Social-share preview image        | exactly 1200×630        |
 
+All media paths live under `config` in `lib/content.ts`.
+
 ## Examples
 
-**Use a hero photo** — add `public/media/hero/hero.jpg`, then in `lib/content.ts`:
+**Use a hero photo** — add `public/media/hero/hero.jpg`, then in
+`config.hero.background`:
 
 ```ts
 background: {
   type: "image",
   src: "/media/hero/hero.jpg",
-  alt: "Capoeira class at Holiday Park",
+  poster: "/media/hero/hero.jpg",
 }
 ```
 
@@ -37,15 +40,17 @@ background: {
   type: "video",
   src: "/media/hero/hero.mp4",
   poster: "/media/hero/hero-poster.jpg",
-  alt: "Capoeira class at Holiday Park",
 }
 ```
 
+**Replace the teacher photo** — add `public/media/teacher/cobra.jpg`, then set
+`config.media.teacherPhoto` to `"/media/teacher/cobra.jpg"`.
+
 **Add a gallery video** — add `public/media/gallery/roda.mp4` and a poster,
-then add an item to the `gallery.items` array:
+then add an item to the `config.gallery` array:
 
 ```ts
-{ type: "video", src: "/media/gallery/roda.mp4", poster: "/media/gallery/roda.jpg", alt: "Roda" }
+{ id: "g7", type: "video", src: "/media/gallery/roda.mp4", poster: "/media/gallery/roda.jpg", alt: "Roda" }
 ```
 
 ## Tips

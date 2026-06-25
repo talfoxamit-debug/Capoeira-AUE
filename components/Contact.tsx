@@ -1,20 +1,15 @@
 "use client";
 
 import { useState, type FormEvent } from "react";
-import {
-  contactSection,
-  contact,
-  whatsappLink,
-  telLink,
-  location,
-} from "@/lib/content";
+import { useSite } from "@/lib/i18n";
+import { whatsappHref, telLink } from "@/lib/content";
 import { WhatsAppIcon, PhoneIcon, PinIcon } from "./Icons";
 
-/** Digits-only number for building a custom wa.me link from the form. */
-const waBase = `https://wa.me/${contact.phoneE164.replace(/[^0-9]/g, "")}`;
-
 export default function Contact() {
+  const { t, cfg } = useSite();
   const [submitted, setSubmitted] = useState(false);
+  const wa = whatsappHref(t.contact.whatsappMessage);
+  const f = t.contact.form;
 
   function handleSubmit(e: FormEvent<HTMLFormElement>) {
     e.preventDefault();
@@ -25,16 +20,15 @@ export default function Contact() {
     const message = (data.get("message") as string)?.trim();
 
     const lines = [
-      "Hi Mestre Cobra! I'd like to join a capoeira class.",
-      name && `Name: ${name}`,
-      contactInfo && `Contact: ${contactInfo}`,
-      level && `Experience: ${level}`,
-      message && `Message: ${message}`,
-    ].filter(Boolean);
+      f.msgIntro,
+      name && `${f.msgName}: ${name}`,
+      contactInfo && `${f.msgContact}: ${contactInfo}`,
+      level && `${f.msgLevel}: ${level}`,
+      message && `${f.msgMessage}: ${message}`,
+    ].filter(Boolean) as string[];
 
-    const url = `${waBase}?text=${encodeURIComponent(lines.join("\n"))}`;
     setSubmitted(true);
-    window.open(url, "_blank", "noopener,noreferrer");
+    window.open(whatsappHref(lines.join("\n")), "_blank", "noopener,noreferrer");
   }
 
   return (
@@ -42,18 +36,18 @@ export default function Contact() {
       <div className="container">
         <div className="contact__grid">
           <div>
-            <p className="eyebrow">{contactSection.eyebrow}</p>
-            <h2 className="section-title">{contactSection.heading}</h2>
-            <p className="section-intro">{contactSection.subheading}</p>
+            <p className="eyebrow">{t.contact.eyebrow}</p>
+            <h2 className="section-title">{t.contact.heading}</h2>
+            <p className="section-intro">{t.contact.subheading}</p>
 
             <div className="contact__cta-stack" style={{ marginTop: "1.8rem" }}>
-              <a className="contact-action" href={whatsappLink} target="_blank" rel="noopener noreferrer">
+              <a className="contact-action" href={wa} target="_blank" rel="noopener noreferrer">
                 <span className="contact-action__icon contact-action__icon--wa">
                   <WhatsAppIcon width={24} height={24} />
                 </span>
                 <span>
-                  <small>Best way to reach us</small>
-                  <strong>Message on WhatsApp</strong>
+                  <small>{t.contact.waSmall}</small>
+                  <strong>{t.contact.waLabel}</strong>
                 </span>
               </a>
 
@@ -62,8 +56,8 @@ export default function Contact() {
                   <PhoneIcon width={24} height={24} />
                 </span>
                 <span>
-                  <small>Prefer to call?</small>
-                  <strong>{contact.phoneDisplay}</strong>
+                  <small>{t.contact.callSmall}</small>
+                  <strong>{cfg.contact.phoneDisplay}</strong>
                 </span>
               </a>
 
@@ -72,68 +66,54 @@ export default function Contact() {
                   <PinIcon width={24} height={24} />
                 </span>
                 <span>
-                  <small>Where we train</small>
-                  <strong style={{ fontSize: "1rem", lineHeight: 1.3 }}>{location.full}</strong>
+                  <small>{t.contact.whereSmall}</small>
+                  <strong style={{ fontSize: "1rem", lineHeight: 1.3 }}>{t.contact.locationFull}</strong>
                 </span>
               </div>
             </div>
           </div>
 
-          {contactSection.form.enabled && (
-            <form className="contact-form" onSubmit={handleSubmit}>
-              <h3>Send a quick message</h3>
-              <p>Fill this in and we&apos;ll open WhatsApp with your details ready to send.</p>
+          <form className="contact-form" onSubmit={handleSubmit}>
+            <h3>{f.title}</h3>
+            <p>{f.intro}</p>
 
-              <div className="field">
-                <label htmlFor="name">Name</label>
-                <input id="name" name="name" type="text" autoComplete="name" placeholder="Your name" required />
-              </div>
+            <div className="field">
+              <label htmlFor="name">{f.name}</label>
+              <input id="name" name="name" type="text" autoComplete="name" placeholder={f.namePh} required />
+            </div>
 
-              <div className="field">
-                <label htmlFor="contact">Phone or email</label>
-                <input
-                  id="contact"
-                  name="contact"
-                  type="text"
-                  autoComplete="tel"
-                  placeholder="How can we reach you?"
-                />
-              </div>
+            <div className="field">
+              <label htmlFor="contact">{f.contact}</label>
+              <input id="contact" name="contact" type="text" autoComplete="tel" placeholder={f.contactPh} />
+            </div>
 
-              <div className="field">
-                <label htmlFor="level">Experience level</label>
-                <select id="level" name="level" defaultValue="">
-                  <option value="" disabled>
-                    Choose one…
+            <div className="field">
+              <label htmlFor="level">{f.level}</label>
+              <select id="level" name="level" defaultValue="">
+                <option value="" disabled>
+                  {f.levelPh}
+                </option>
+                {f.levels.map((lvl) => (
+                  <option key={lvl} value={lvl}>
+                    {lvl}
                   </option>
-                  {contactSection.form.experienceLevels.map((lvl) => (
-                    <option key={lvl} value={lvl}>
-                      {lvl}
-                    </option>
-                  ))}
-                </select>
-              </div>
+                ))}
+              </select>
+            </div>
 
-              <div className="field">
-                <label htmlFor="message">Message</label>
-                <textarea
-                  id="message"
-                  name="message"
-                  placeholder="Tell us a little about what you're looking for (optional)"
-                />
-              </div>
+            <div className="field">
+              <label htmlFor="message">{f.message}</label>
+              <textarea id="message" name="message" placeholder={f.messagePh} />
+            </div>
 
-              <button className="btn btn--whatsapp" type="submit">
-                <WhatsAppIcon width={20} height={20} />
-                Send via WhatsApp
-              </button>
-              <p className="contact-form__hint" role="status">
-                {submitted
-                  ? "Opening WhatsApp… if nothing happened, tap the WhatsApp button above."
-                  : "Opens WhatsApp with your message pre-filled. No account or sign-up needed."}
-              </p>
-            </form>
-          )}
+            <button className="btn btn--whatsapp" type="submit">
+              <WhatsAppIcon width={20} height={20} />
+              {f.submit}
+            </button>
+            <p className="contact-form__hint" role="status">
+              {submitted ? f.hintSubmitted : f.hintIdle}
+            </p>
+          </form>
         </div>
       </div>
     </section>

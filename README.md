@@ -18,24 +18,34 @@ npm run build
 npm start
 ```
 
-## ✏️ Editing the site (the only file you usually touch)
+## 🌐 Languages (English / Spanish / Portuguese)
 
-**`lib/content.ts`** holds every piece of text, the schedule, pricing, contact
-links, FAQ, and media paths. Edit it and the whole page updates — no component
-code required.
+The site has a language switcher (EN · ES · PT) in the header. On first visit it
+auto-selects the visitor's browser language and remembers their choice.
+
+All text lives in `lib/content.ts`:
+
+- **`config`** — things that are the same in every language (phone, schedule
+  times, prices, links, media paths).
+- **`dictionary`** — the translated text, with one block per language: `en`,
+  `es`, `pt`. To change wording, edit it in all three blocks.
+
+(The search-engine data and page `<title>`/description stay in English, the
+primary search target.)
+
+## ✏️ Editing the site
+
+**`lib/content.ts`** is the only file you usually touch.
 
 Common edits:
 
-| Want to change…             | Edit in `lib/content.ts`        |
-|-----------------------------|---------------------------------|
-| Phone / WhatsApp number     | `contact` (replace placeholder) |
-| Class days & times          | `schedule.classes`              |
-| Prices                      | `pricing`                       |
-| FAQ                         | `faq.items`                     |
-| Photos & videos             | `hero`, `teacher`, `gallery`    |
-
-> ⚠️ Before going live, replace the placeholder phone number in `contact` with
-> Mestre Cobra's real number (used for both the call and WhatsApp links).
+| Want to change…             | Edit in `lib/content.ts`                    |
+|-----------------------------|---------------------------------------------|
+| Phone / WhatsApp number     | `config.contact`                            |
+| Class days & times          | `config.schedule.classes`                   |
+| Prices                      | `config.pricing` + the words in `dictionary`|
+| Any text / FAQ              | `dictionary` (`en`, `es`, `pt`)             |
+| Photos & videos             | `config.hero`, `config.media`, `config.gallery` |
 
 ## 🖼 Replacing photos & videos
 
@@ -53,9 +63,11 @@ app/
   robots.ts         # /robots.txt
   sitemap.ts        # /sitemap.xml
 components/          # Hero, AboutCapoeira, AboutTeacher, SchedulePricing,
-                    # WhoCanJoin, Gallery, FAQ, Contact, Footer, Header, ...
+                    # WhoCanJoin, Gallery, FAQ, Contact, Footer, Header,
+                    # LanguageSwitcher, ...
   JsonLd.tsx        # LocalBusiness / SportsActivityLocation + FAQ structured data
-lib/content.ts      # ← all editable content
+lib/content.ts      # ← all editable content (config + en/es/pt dictionary)
+lib/i18n.tsx        # language provider + useSite() hook (EN/ES/PT switching)
 public/media/       # images & videos (with a README on replacing them)
 ```
 

@@ -1,9 +1,15 @@
+"use client";
+
 import Image from "next/image";
-import { hero, whatsappLink, location, brand } from "@/lib/content";
-import { WhatsAppIcon, PinIcon, GlobeIcon, ClockIcon } from "./Icons";
+import { useSite } from "@/lib/i18n";
+import { whatsappHref, telLink } from "@/lib/content";
+import { WhatsAppIcon, PhoneIcon, PinIcon, GlobeIcon, ClockIcon } from "./Icons";
 
 export default function Hero() {
-  const bg = hero.background;
+  const { t, cfg } = useSite();
+  const bg = cfg.hero.background;
+  const wa = whatsappHref(t.contact.whatsappMessage);
+
   return (
     <section className="hero" id="top">
       <div className="hero__media" aria-hidden="true">
@@ -12,14 +18,7 @@ export default function Hero() {
             <source src={bg.src} type="video/mp4" />
           </video>
         ) : (
-          <Image
-            src={bg.src}
-            alt=""
-            fill
-            priority
-            sizes="100vw"
-            style={{ objectFit: "cover" }}
-          />
+          <Image src={bg.src} alt="" fill priority sizes="100vw" style={{ objectFit: "cover" }} />
         )}
       </div>
       <div className="hero__scrim" aria-hidden="true" />
@@ -27,37 +26,41 @@ export default function Hero() {
       <div className="container hero__content">
         <span className="hero__eyebrow">
           <span className="dot" />
-          {hero.eyebrow}
+          {t.hero.eyebrow}
         </span>
 
         <h1>
-          Capoeira Classes in <span className="accent">Fort Lauderdale</span>
+          {t.hero.headlinePre} <span className="accent">{t.hero.headlineAccent}</span>
         </h1>
 
-        <p className="hero__sub">{hero.subheadline}</p>
+        <p className="hero__sub">{t.hero.sub}</p>
 
         <div className="btn-row">
-          <a className="btn btn--whatsapp btn--lg" href={whatsappLink} target="_blank" rel="noopener noreferrer">
+          <a className="btn btn--whatsapp btn--lg" href={wa} target="_blank" rel="noopener noreferrer">
             <WhatsAppIcon width={20} height={20} />
-            {hero.primaryCta}
+            {t.hero.ctaWhatsapp}
+          </a>
+          <a className="btn btn--gold btn--lg" href={telLink}>
+            <PhoneIcon width={19} height={19} />
+            {t.hero.ctaCall}
           </a>
           <a className="btn btn--ghost btn--lg" href="#schedule">
-            {hero.secondaryCta}
+            {t.hero.ctaSchedule}
           </a>
         </div>
 
         <div className="hero__meta">
           <div>
             <PinIcon width={18} height={18} />
-            {location.name} · {location.detail}
+            {cfg.location.name} · {t.schedule.locationDetail}
           </div>
           <div>
             <ClockIcon width={18} height={18} />
-            Sun, Tue &amp; Thu
+            {t.hero.metaDays}
           </div>
           <div>
             <GlobeIcon width={18} height={18} />
-            {brand.languages.join(" · ")}
+            {t.languagesLine}
           </div>
         </div>
       </div>
