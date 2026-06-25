@@ -1,0 +1,38 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 630" width="1200" height="630" role="img" aria-label="Capoeira Auê Fort Lauderdale — capoeira classes with Mestre Cobra">
+  <defs>
+    <linearGradient id="obg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#0f5c3c"/>
+      <stop offset="0.55" stop-color="#0a3d2a"/>
+      <stop offset="1" stop-color="#062619"/>
+    </linearGradient>
+    <radialGradient id="osun" cx="0.82" cy="0.28" r="0.5">
+      <stop offset="0" stop-color="#ffd874" stop-opacity="0.55"/>
+      <stop offset="1" stop-color="#ffd874" stop-opacity="0"/>
+    </radialGradient>
+  </defs>
+  <rect width="1200" height="630" fill="url(#obg)"/>
+  <rect width="1200" height="630" fill="url(#osun)"/>
+  <circle cx="985" cy="170" r="86" fill="#ffd874" opacity="0.85"/>
+
+  <ellipse cx="900" cy="540" rx="320" ry="46" fill="#02160d" opacity="0.4"/>
+
+  <!-- kick figure -->
+  <g transform="translate(760 200) scale(1.0)" stroke="#04241c" stroke-width="32" stroke-linecap="round" fill="none">
+    <path d="M120 70 L108 168"/><path d="M108 168 L96 300"/><path d="M96 300 L134 312"/>
+    <path d="M108 168 L228 64"/><path d="M115 100 L56 140"/><path d="M115 100 L152 52"/>
+  </g>
+  <circle cx="884" cy="242" r="26" fill="#04241c"/>
+  <g transform="translate(760 200)" stroke="#ffd874" stroke-width="5" stroke-linecap="round" fill="none" opacity="0.6">
+    <path d="M108 168 L228 64"/>
+  </g>
+
+  <!-- text -->
+  <g font-family="'Sora','Segoe UI',sans-serif">
+    <text x="80" y="200" fill="#ffd874" font-size="26" font-weight="600" letter-spacing="6">CAPOEIRA AUÊ · FORT LAUDERDALE</text>
+    <text x="76" y="300" fill="#ffffff" font-size="80" font-weight="800" letter-spacing="-2">Capoeira Classes</text>
+    <text x="76" y="386" fill="#ffffff" font-size="80" font-weight="800" letter-spacing="-2">in Fort Lauderdale</text>
+    <text x="80" y="452" fill="#cfe0d6" font-size="30" font-weight="500">Train with Mestre Cobra from Rio de Janeiro</text>
+  </g>
+  <rect x="80" y="500" width="290" height="58" rx="29" fill="#25d366"/>
+  <text x="225" y="538" text-anchor="middle" fill="#053a1c" font-family="'Sora',sans-serif" font-size="24" font-weight="700">First class free</text>
+</svg>

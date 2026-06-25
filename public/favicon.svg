@@ -1,0 +1,13 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 44 44" width="44" height="44" role="img" aria-label="Capoeira Auê">
+  <rect width="44" height="44" rx="11" fill="#0d4f36"/>
+  <path d="M14 9c8 5 12 16 9 27" fill="none" stroke="#f5b820" stroke-width="2.4" stroke-linecap="round"/>
+  <circle cx="14" cy="9" r="2.2" fill="#f5b820"/>
+  <circle cx="23" cy="36" r="2.2" fill="#f5b820"/>
+  <g stroke="#fff" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" fill="none">
+    <path d="M22 16.6 L20.6 24"/>
+    <path d="M20.6 24 L18.5 31"/>
+    <path d="M20.6 24 L27 18.5"/>
+    <path d="M21.2 18.4 L17.4 20.8"/>
+  </g>
+  <circle cx="22.6" cy="14.4" r="2.1" fill="#fff"/>
+</svg>
