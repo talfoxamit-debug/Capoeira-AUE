@@ -62,8 +62,18 @@ const PHONE_E164 = "+19548728265"; // Mestre Cobra's real number
 export const config = {
   site: {
     name: "Capoeira Auê Fort Lauderdale",
-    /** Production URL — update when you deploy (canonical + OpenGraph). */
-    url: "https://capoeiraaue-fortlauderdale.com",
+    /**
+     * Production URL — used for canonical links, OpenGraph, sitemap & JSON-LD.
+     * Resolves automatically:
+     *   1. NEXT_PUBLIC_SITE_URL  (set this to your custom domain once you have one)
+     *   2. the Vercel production URL (set automatically on Vercel)
+     *   3. the placeholder below (local dev)
+     */
+    url:
+      process.env.NEXT_PUBLIC_SITE_URL ||
+      (process.env.VERCEL_PROJECT_PRODUCTION_URL
+        ? `https://${process.env.VERCEL_PROJECT_PRODUCTION_URL}`
+        : "https://capoeiraaue-fortlauderdale.com"),
     /** OpenGraph / social share image (1200×630). */
     ogImage: "/media/og-image.jpg",
     /** SEO title + description (English — the primary search target). */
