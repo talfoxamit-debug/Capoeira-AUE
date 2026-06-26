@@ -211,8 +211,8 @@ export const telLink = `tel:${config.contact.phoneE164}`;
 export const mapsHref = `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(
   config.location.mapsQuery,
 )}`;
-/** Embeddable Google Map (no API key required). */
-export const mapsEmbed = `https://maps.google.com/maps?q=${encodeURIComponent(
+/** Embeddable Google Map (no API key required). Uses the canonical google.com host. */
+export const mapsEmbed = `https://www.google.com/maps?q=${encodeURIComponent(
   config.location.mapsQuery,
 )}&z=15&output=embed`;
 /** Build a wa.me link with a (localized) pre-filled message. */

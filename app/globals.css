@@ -406,7 +406,7 @@ ul {
   font-size: 0.78rem;
   letter-spacing: 0.02em;
   color: var(--green-800);
-  padding: 0.32rem 0.5rem;
+  padding: 0.5rem 0.62rem;
   border-radius: 999px;
   cursor: pointer;
   line-height: 1;
@@ -1208,8 +1208,14 @@ ul {
 .footer__cols a,
 .footer__cols li {
   font-size: 0.95rem;
-  margin-bottom: 0.4rem;
+  margin-bottom: 0.25rem;
   color: #cfe0d6;
+}
+
+/* Give linked footer items a comfortable tap target (>=24px). */
+.footer__cols a {
+  display: inline-block;
+  padding-block: 0.3rem;
 }
 
 .footer__cols a:hover {
